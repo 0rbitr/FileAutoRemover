@@ -1,8 +1,37 @@
 ﻿<Window x:Class="FileAutoRemoverProgect.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="270" Width="525">
     <Grid>
-        
+        <Label Content="Выберите папку:
+               " HorizontalAlignment="Left" Margin="24,25,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="FolderPath" HorizontalAlignment="Left" Height="23" Margin="132,28,0,0"
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="357" IsReadOnly="True" MouseDoubleClick="FolderPath_MouseDown"/>
+        <Label Content="Выберите стандартное время жизни файла:
+               " HorizontalAlignment="Left" Height="27" Margin="24,61,0,0" VerticalAlignment="Top"
+               Width="259"/>
+        <ComboBox x:Name="CbDaysOrHours" HorizontalAlignment="Left" Margin="391,66,0,0" VerticalAlignment="Top"
+                  Width="99" SelectedIndex="1">
+            <ComboBoxItem Content="Часов"/>
+            <ComboBoxItem Content="Дней"/>
+        </ComboBox>
+        <TextBox x:Name="FileStandartLifetime" HorizontalAlignment="Left" Height="23"
+                 Margin="289,65,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"
+                 Width="79" MaxLines="1" MaxLength="3" IsUndoEnabled="True"
+                 PreviewTextInput="FileStandartLifetime_PreviewTextInput" TextAlignment="Center" />
+        <Label Content="Выберите место хранения архива
+:" HorizontalAlignment="Left" Margin="24,106,0,0" VerticalAlignment="Top" Width="204"/>
+        <TextBox x:Name="ArchivePath" HorizontalAlignment="Left" Height="23" Margin="229,109,0,0"
+        	TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="261" IsReadOnly="True" MouseDoubleClick="FolderPath_MouseDown"/>
+        <Label Content="Стандартное действие по окончании жизни файла:" HorizontalAlignment="Left"
+               Margin="24,146,0,0" VerticalAlignment="Top" Width="293"/>
+        <ComboBox x:Name="ComboEndOfLife" HorizontalAlignment="Left" Height="26" Margin="344,146,0,0" VerticalAlignment="Top" Width="145" SelectedIndex="0">
+            <ComboBoxItem Content="Архивировать"/>
+            <ComboBoxItem Content="Удалить"/>
+            <ComboBoxItem Content="Спромить позже"/>
+        </ComboBox>
+        <Button Content="Сохранть" Margin="64,0,306,20" Click="Button_Click" Height="22" VerticalAlignment="Bottom"/>
+        <Button x:Name="BtDefault" Content="По умолчанию" Margin="312,0,58,20" Height="22" VerticalAlignment="Bottom" Click="BtDefault_Click"/>
+
     </Grid>
 </Window>

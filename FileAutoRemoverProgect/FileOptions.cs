@@ -6,26 +6,13 @@ namespace FileAutoRemoverProgect
     [Serializable]
     class FileOptions
     {
-        public enum EndOfFilesLifeOption
-        {
-            Nothing, Delete, Archive, Ask
-        }
-        public enum FileState
-        {
-            Alive, Deleted, Archivated
-        }
-        #region private_declarations
-        
-        private DateTime _creationDate;
-        private FileState _state;
-        #endregion
-
+      
         #region public_declarations
-        public DateTime CreationDate { get {return _creationDate;}  }
+        public DateTime CreationDate { get; private set; }
         public List<string> PathList { get; set; }
         public EndOfFilesLifeOption EndOfLifeOption { get; set; }
         public DateTime KillingTime { get; set; }
-        public FileState State { get; }
+        public FileState State { get; private set; }
         #endregion
 
         #region Constructors
@@ -36,9 +23,9 @@ namespace FileAutoRemoverProgect
             EndOfLifeOption = endOfLife;
             PathList = new List<string>();
             PathList.AddRange(pathList);
-            _creationDate = DateTime.Now;
+            CreationDate = DateTime.Now;
             KillingTime = killingTime;
-            _state = FileState.Alive;
+            State = FileState.Alive;
         }
         public FileOptions(string path, EndOfFilesLifeOption endOfLife, DateTime killingTime)
             : this(new List<string>(), endOfLife, killingTime)
@@ -67,9 +54,11 @@ namespace FileAutoRemoverProgect
                     break;
                 case EndOfFilesLifeOption.Delete:
                     Delete();
+                    State = FileState.Deleted;
                     break;
                 case EndOfFilesLifeOption.Archive:
                     ToArchive();
+                    State = FileState.Archivated;
                     break;
                 case EndOfFilesLifeOption.Ask:
                     //TODO вызов окна диалога выбора действия над файлами
@@ -89,7 +78,19 @@ namespace FileAutoRemoverProgect
         {
             foreach (var item in PathList)
             {
-                File.Delete(item);
+                try
+                {
+                    File.Delete(item);
+                }
+                catch  (DirectoryNotFoundException ex)
+                {
+                    //TODO сообщение об отсутствии файла
+                }
+                catch (Exception ex)
+                {
+                    //TODO сообщение об ошибке
+                }
+                
             }
         }
     }
