@@ -3,7 +3,7 @@
 
 namespace FileAutoRemoverProgect
 {
-    public static class Settings
+    public static class PorjectSettings
     {
         public static string FolderPath { get; set; }
         public static string ArchivePath { get; set; }

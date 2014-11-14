@@ -64,12 +64,12 @@ namespace FileAutoRemoverProgect
             int i = int.Parse(FileStandartLifetime.Text);
             if (CbDaysOrHours.SelectedIndex == 0)
             {
-                Settings.SaveSettings(FolderPath.Text, ArchivePath.Text,
+                PorjectSettings.SaveSettings(FolderPath.Text, ArchivePath.Text,
                new TimeSpan(i,0,0), (EndOfFilesLifeOption)ComboEndOfLife.SelectedIndex);
             }
             else if (CbDaysOrHours.SelectedIndex == 1)
             {
-                Settings.SaveSettings(FolderPath.Text, ArchivePath.Text,
+                PorjectSettings.SaveSettings(FolderPath.Text, ArchivePath.Text,
                new TimeSpan(i, 0, 0, 0), (EndOfFilesLifeOption)ComboEndOfLife.SelectedIndex);
             }
            
@@ -77,28 +77,28 @@ namespace FileAutoRemoverProgect
 
         private void BtDefault_Click(object sender, RoutedEventArgs e)
         {
-            Settings.Default();
+            PorjectSettings.Default();
             GetSettings();
 
         }
         
         private void GetSettings()
         {
-            if (Settings.StandartFilesLifeTimeSpan.Hours != 0)
+            if (PorjectSettings.StandartFilesLifeTimeSpan.Hours != 0)
             {
                 CbDaysOrHours.SelectedIndex = 1;
                 FileStandartLifetime.Text =
-                    Settings.StandartFilesLifeTimeSpan.TotalHours.ToString();
+                    PorjectSettings.StandartFilesLifeTimeSpan.TotalHours.ToString();
             }
             else
             {
                 CbDaysOrHours.SelectedIndex = 0;
                 FileStandartLifetime.Text =
-                    Settings.StandartFilesLifeTimeSpan.TotalDays.ToString();
+                    PorjectSettings.StandartFilesLifeTimeSpan.TotalDays.ToString();
             }
-            FolderPath.Text = Settings.FolderPath;
-            ArchivePath.Text = Settings.ArchivePath;
-            ComboEndOfLife.SelectedIndex = (int)Settings.StandartEndOfLifeOption;
+            FolderPath.Text = PorjectSettings.FolderPath;
+            ArchivePath.Text = PorjectSettings.ArchivePath;
+            ComboEndOfLife.SelectedIndex = (int)PorjectSettings.StandartEndOfLifeOption;
         }
     }
 }

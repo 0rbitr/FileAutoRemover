@@ -45,7 +45,7 @@ namespace FileAutoRemoverProgect
 
         } 
         #endregion
-        public void ExecuteDeletations()
+        public void ExrcuteEndOfLifeActions()
         {
             switch (EndOfLifeOption)
             {
